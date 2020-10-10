@@ -1,0 +1,12 @@
+<h2>Welcome {{user.name}}</h2>
+<i>role: {{user.role}}</i><br><br>
+
+
+<div *ngFor="let group of userGroups" > 
+        <div *ngIf="group.groups != '' ">
+        <br><div>Groups you are a member: <b>{{group.groups}}</b></div> <br>
+        <ol *ngFor="let room of group.rooms"> 
+                  available rooms: <b>{{room}}</b> 
+        </ol>
+        </div>
+</div>
