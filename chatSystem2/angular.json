@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "chatSystem2"
+    }
+  },
+  "defaultProject": "chatSystem2",
+  "cli": {
+    "analytics": false
+  }
 }
