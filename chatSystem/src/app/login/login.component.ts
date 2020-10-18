@@ -14,6 +14,14 @@ export class LoginComponent implements OnInit {
   password= "";
 
   users: any;
+  loggedIn= false;
+  loggedUser: any;
+
+  newUserName= "";
+  newUserEmail= "";
+  newUserArray= {'name':'', 'email':'', 'role':'user'};
+
+  index = -1;
 
   constructor(private router: Router, private route: ActivatedRoute, private loginService: LoginService) { 
     this.users=[
@@ -35,14 +43,33 @@ export class LoginComponent implements OnInit {
   login(){
     for (let i in this.users) {
       if (this.name == this.users[i].name && this.password == "123"){
-        this.router.navigate(['account'], { queryParams: { user: this.users[i] } });
+        //this.router.navigate(['account'], { queryParams: { user: this.users[i] } });
         localStorage.setItem("loggedInUser", JSON.stringify(this.users[i]) );
+        this.loggedUser = this.users[i];
         this.loginService.isLoggedIn = true;
+        this.loggedIn = this.loginService.isLoggedIn;
         localStorage.setItem("isLoggedIn", JSON.stringify(this.loginService.isLoggedIn) );
       }
     }
   }
 
+  goAccount(){
+    this.router.navigate(['account'], { queryParams: { user: this.loggedUser} });
+  }
 
+  createUser(){
+    this.newUserArray.name = this.newUserName;
+    this.newUserArray.email = this.newUserEmail;
+    this.users.push(this.newUserArray);
+    console.log(this.newUserArray);
+  }
 
+  deleteUser(){
+    for (let i in this.users){
+      if (this.users[i].name == this.newUserName){
+        this.users.splice(i, 1);
+        console.log("deleted", this.users[i]);
+      }
+    }
+  }
 }

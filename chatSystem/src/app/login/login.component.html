@@ -18,6 +18,31 @@
       <button (click)="login()"> Log-In </button>
     </form>
 
-
   </div>
+
+<div *ngIf="loggedIn == true">
+  <button (click)="goAccount()"> Go To Account </button><br><br>
+
+<div class="row" *ngIf="loggedUser.role == 'superAdmin' || loggedUser.role =='groupAdmin' ">
+
+  <div class="col">
+    <h2>All Users</h2><br>
+      <ol *ngFor="let user of users">
+        <b>name:</b> {{user.name}}  <b>email:</b> {{user.email}}
+      </ol>
+  </div>
+
+  <div class="col">
+    <h2>Create a new user</h2>
+    <form>
+      <input type="text" [(ngModel)]="newUserName" id="login"  name="newUserName" placeholder="Enter Name">
+      <input type="text" [(ngModel)]="newUserEmail" id="login"  name="newUserEmail" placeholder="Enter Email">
+      <button (click)="createUser()"> Create User </button>
+      &nbsp;
+      <button (click)="deleteUser()"> Delete User </button><br><br>
+    </form>
+  </div>
+</div>
+</div>
+
 </div>

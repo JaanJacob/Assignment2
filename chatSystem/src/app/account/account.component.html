@@ -1,12 +1,40 @@
 <h2>Welcome {{user.name}}</h2>
 <i>role: {{user.role}}</i><br><br>
 
+<div class="row">
+        <div class="col">    
+        <div *ngFor="let group of userGroups" > 
+                <div *ngIf="group.groups != '' ">
+                <br><div>Groups you are a member: <b>{{group.groups}}</b></div> <br>
+                <ol *ngFor="let room of group.rooms"> 
+                        available rooms: <b>{{room}}</b> 
+                </ol>
+                </div>
+        </div>
+</div>
 
-<div *ngFor="let group of userGroups" > 
-        <div *ngIf="group.groups != '' ">
-        <br><div>Groups you are a member: <b>{{group.groups}}</b></div> <br>
-        <ol *ngFor="let room of group.rooms"> 
-                  available rooms: <b>{{room}}</b> 
-        </ol>
+        <div class="col">
+                <div *ngIf="user.role == 'superAdmin' || user.role =='groupAdmin' "> 
+                        <h2>All groups</h2><br>
+                        <ol *ngFor="let group of groups">
+                                {{group.groupName}}
+                        </ol>
+                <br>
+
+                <div id="formContent">
+                        <h2>Create a new group</h2>
+                        <!-- Login Form -->
+                        <form>
+                          <input type="text" [(ngModel)]="formGroupName" id="login"  name="fornGroupName" placeholder="Group Name">
+                          <input type="text" [(ngModel)]="formRoomName" id="login"  name="formRoomName" placeholder="Room Name">
+                          <button (click)="addGroup()"> AddGroup </button>
+                          &nbsp;
+                          <button (click)="deleteGroup()"> Delete Group </button><br><br>
+                        </form>
+                    
+                    
+                      </div>
+                </div>
+
         </div>
 </div>
