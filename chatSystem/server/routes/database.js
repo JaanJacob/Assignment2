@@ -80,4 +80,14 @@ module.exports = function(db, app) {
   //--------------------------------------------------------------------------------------------------------
   //--------------------------------------------------------------------------------------------------------
   
+    //Get user data
+  //Return all users. 
+  app.get("/api/allUsers", function(req, res) {
+    const collection = db.collection("users");
+    users = [];
+    collection.find({}).toArray(function(err, data) {
+      res.send(data);
+    });
+  });
+
   };

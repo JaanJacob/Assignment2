@@ -4,6 +4,8 @@ import { Router } from "@angular/router"
 import { LoginService } from '../services/login.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'})};
+
 const BACKEND_URL = 'http://localhost:3000';
 
 @Component({
@@ -28,7 +30,13 @@ export class LoginComponent implements OnInit {
   index = -1;
 
   constructor(private router: Router, private route: ActivatedRoute, private loginService: LoginService, 
-              private httpClient: HttpClient) {}
+              private httpClient: HttpClient) {
+                // Route to get all the users for super and groupAdmin.
+                this.httpClient.post(BACKEND_URL + '/api/allUsers', httpOptions)
+                .subscribe((data:any) => {
+                  this.users = data; 
+                });
+              }
 
   ngOnInit(): void {
   }
@@ -48,6 +56,7 @@ export class LoginComponent implements OnInit {
   goAccount(){
     this.router.navigate(['account'], { queryParams: { user: this.loggedUser} });
   }
+
 
   createUser(){
     this.httpClient.post(BACKEND_URL + '/api/addUser', this.newUserArray)
