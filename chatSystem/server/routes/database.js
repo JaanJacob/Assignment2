@@ -38,5 +38,36 @@ module.exports = function(db, app) {
   //--------------------------------------------------------------------------------------------------------
   //--------------------------------------------------------------------------------------------------------
   
+
+  //Add user route
+  app.post("/api/addUser", function(req, res) {
+    user = {};
+
+    if (!req.body) {
+      return res.sendStatus(400);
+    }
+
+    valid = true;
+
+    const collection = db.collection("users");
+
+    user.username = req.body.name;
+    user.role = req.body.role;
+    user.email = req.body.email;
+
+    //Check if the user already exists in the database with the same username, if not, add the user to the database
+    collection.find({ name: user.username }).count((err, count) => {
+      if (count == 0) {
+        collection.insertOne(user);
+        res.send(true);
+      } else {
+        res.send(false);
+      }
+    });
+  });
+  //---------------------------------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------------------------------------
+
+  
   
   };

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from "@angular/router"; 
 import { Router } from "@angular/router"
 import { LoginService } from '../services/login.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const BACKEND_URL = 'http://localhost:3000';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   name= "";
   password= "";
+  formData = {name: this.name, password: this.password};
 
   users: any;
   loggedIn= false;
@@ -19,38 +23,26 @@ export class LoginComponent implements OnInit {
 
   newUserName= "";
   newUserEmail= "";
-  newUserArray= {'name':'', 'email':'', 'role':'user'};
+  newUserArray= {name: this.newUserName, email: this.newUserEmail, role: 'user'};
 
   index = -1;
 
-  constructor(private router: Router, private route: ActivatedRoute, private loginService: LoginService) { 
-    this.users=[
-      {"name": "super", "email": "super@gmail.com", "id": 1, "role": "superAdmin" },
-      {"name": "groupAD", "email": "groupAD@gmail.com", "id": 2, "role": "groupAdmin" },
-      {"name": "groupAS", "email": "groupAD@gmail.com", "id": 3, "role": "groupAssis" },
-
-      {"name": "aa", "email": "aa@gmail.com", "id": 4, "role": "user" },
-      {"name": "bb", "email": "bb@gmail.com", "id": 5, "role": "user" },
-      {"name": "cc", "email": "cc@gmail.com", "id": 6, "role": "user" },
-      {"name": "dd", "email": "dd@gmail.com", "id": 7, "role": "user" },
-      {"name": "ee", "email": "ee@gmail.com", "id": 8, "role": "user" }  
-    ];
-  }
+  constructor(private router: Router, private route: ActivatedRoute, private loginService: LoginService, 
+              private httpClient: HttpClient) {}
 
   ngOnInit(): void {
   }
 
   login(){
-    for (let i in this.users) {
-      if (this.name == this.users[i].name && this.password == "123"){
-        //this.router.navigate(['account'], { queryParams: { user: this.users[i] } });
-        localStorage.setItem("loggedInUser", JSON.stringify(this.users[i]) );
-        this.loggedUser = this.users[i];
-        this.loginService.isLoggedIn = true;
-        this.loggedIn = this.loginService.isLoggedIn;
-        localStorage.setItem("isLoggedIn", JSON.stringify(this.loginService.isLoggedIn) );
+    this.httpClient.post(BACKEND_URL + '/api/checkLogin', this.formData)
+    .subscribe((data:any) => {
+      if (data.valid == true){
+        this.loggedIn = true;
+        localStorage.setItem("loggedInUser", JSON.stringify(data.username) ); 
+        localStorage.setItem("role", JSON.stringify(data.role) ); 
+        this.loggedUser = {role: data.role};
       }
-    }
+    });
   }
 
   goAccount(){
@@ -58,10 +50,14 @@ export class LoginComponent implements OnInit {
   }
 
   createUser(){
-    this.newUserArray.name = this.newUserName;
-    this.newUserArray.email = this.newUserEmail;
-    this.users.push(this.newUserArray);
-    console.log(this.newUserArray);
+    this.httpClient.post(BACKEND_URL + '/api/addUser', this.newUserArray)
+    .subscribe((data:any) => {
+      if (data == true){
+        console.log("new user created");
+      }else {
+        console.log("Error in creating user");
+      }
+    });
   }
 
   deleteUser(){
