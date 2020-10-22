@@ -68,6 +68,16 @@ module.exports = function(db, app) {
   //---------------------------------------------------------------------------------------------------------
   //---------------------------------------------------------------------------------------------------------
 
-  
+   //Delete user
+   app.post("/api/deleteUser", function(req, res) {
+    user = req.body.newUserName;
+
+    const collection = db.collection("users");
+    //Find the username passed in the request and delete the whole object in the database
+    collection.deleteOne({ name: user });
+    res.send(true);
+  });
+  //--------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------
   
   };

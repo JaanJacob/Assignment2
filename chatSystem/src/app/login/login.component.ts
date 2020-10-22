@@ -61,11 +61,13 @@ export class LoginComponent implements OnInit {
   }
 
   deleteUser(){
-    for (let i in this.users){
-      if (this.users[i].name == this.newUserName){
-        this.users.splice(i, 1);
-        console.log("deleted", this.users[i]);
+    this.httpClient.post(BACKEND_URL + '/api/deleteUser', this.newUserName)
+    .subscribe((data:any) => {
+      if (data == true){
+        console.log(this.newUserName + " User deleted from database");
+      }else {
+        console.log("Error in deleting user");
       }
-    }
+    });
   }
 }
