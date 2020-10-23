@@ -10,6 +10,9 @@ The url of the GitHub submission : https://github.com/JaanJacob/Assignment2.git
 ## __Documentation - Data Structures__
 The Data structure is very straight forward. The data is kept in mongodb with three collections, one for the user data, one for the groups and channel data and one for all the chat messages. The client is making a call to the node server in order to retrieve the particular information from the database. 
 
+## __Users:__
+User names are defined as ‘aa’, ‘bb’ etc for convenience.
+All the users have the same password ‘123’.
 name | email | id | role
 -----|-------|----|-----
 super |	super@gmail.com |	1 |	superAdmin
