@@ -28,11 +28,11 @@ MongoClient.connect(url, {poolSize:10, useNewUrlParser: true, useUnifiedTopology
     
 });
 
-//const sockets = require('./socket.js');
-//.connect(io, 3000);
+const sockets = require('./socket.js');
+sockets.connect(io, 3000);
 
 app.use(express.static(path.join(__dirname, "../dist/chatSystem")));
 
 server.listen(3000, () => {
-  console.log(`server started on port: 3000`);
+  console.log('server started on port: 3000');
 });
