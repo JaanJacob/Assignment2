@@ -2,12 +2,12 @@
 Assignment 2 of Software Frameworks. 
 
 
-__## Documentation – Git__
+## __Documentation – Git__
 GitHub is used for version control in this project. Blocks of code are regularly submitted to GitHub as soon as they are in a working order. Every commit is made with an appropriate comment to understand what that commit is about, for future reference. The structure used here is very simple, ‘main’ is the branch and all the commits are pushed into it. The need for another branch didn’t occur in this project. 
 The url of the GitHub submission : https://github.com/JaanJacob/Assignment2.git
 
 
-__## Documentation - Data Structures__
+## __Documentation - Data Structures__
 The Data structure is very straight forward. The data is kept in mongodb with three collections, one for the user data, one for the groups and channel data and one for all the chat messages. The client is making a call to the node server in order to retrieve the particular information from the database. 
 
 ## __Documentation - REST API__
