@@ -25,10 +25,10 @@ The angular application is communicating with node through routes, in order to r
 
 
 ## __Documentation - Angular Architecture__
-The angular architecture is very basic with three components, two services, and a node server. The three components are login component, Account component and chat component. 
-Login component gets view first as the app launches, It shows a login form which take in a user name and password which is then passed to the server via routers for validation. If the validation is a successes then the login page displays a ‘Go to account’ button for all users, but for super admin and group admin the page lists all the users and a form to add or delete a user. 
-Then the Account page is loaded with all the groups that the user is a part of and all the channels in that particular group.  This group has a form with take a group name and adds it to the group list. 
-The chat component loads a simple chat session which take a message and views it in the page. 
+The angular architecture is very basic with three components, two services, and a node server. The three components are login component, Account component and chat component.    
+Login component gets view first as the app launches, It shows a login form which take in a user name and password which is then passed to the server via routers for validation. If the validation is a successes then the login page displays a ‘Go to account’ button for all users, but for super admin and group admin the page lists all the users and a form to add or delete a user.     
+Then the Account page is loaded with all the groups that the user is a part of and all the channels in that particular group.  This group has a form with take a group name and adds it to the group list.    
+The chat component loads a simple chat session which take a message and views it in the page.    
 Two services have been used, one for socket and one for remembering login success so that all the session which requires logged in in order to be viewed can be displayed (eg: logout button). 
 
 
