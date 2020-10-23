@@ -10,6 +10,17 @@ The url of the GitHub submission : https://github.com/JaanJacob/Assignment2.git
 ## __Documentation - Data Structures__
 The Data structure is very straight forward. The data is kept in mongodb with three collections, one for the user data, one for the groups and channel data and one for all the chat messages. The client is making a call to the node server in order to retrieve the particular information from the database. 
 
+name | email | id | role
+-----|-------|----|-----
+super |	super@gmail.com |	1 |	superAdmin
+groupAD |	groupAD@gmail.com |	2 |	groupAdmin
+groupAS |	groupAS@gmail.com |	3 |	groupAssis
+aa |	aa@gmail.com |	4 |	user
+bb |	bb@gmail.com |	5 |	user
+cc |	cc@gmail.com |	6 |	user
+dd |	dd@gmail.com |	7 |	user
+ee |	ee@gmail.com |	8 |	user
+
 ## __Documentation - REST API__
 The angular application is communicating with node through routes, in order to retrieve and process data. 
 
