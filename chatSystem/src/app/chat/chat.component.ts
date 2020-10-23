@@ -27,7 +27,7 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  public chat() {
+  public chat() {   
 
     if (this.newMessage) {
       this.socketService.send(this.newMessage);

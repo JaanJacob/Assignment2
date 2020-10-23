@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // function executes when the login button is pressesd. 
   login(){
     this.httpClient.post(BACKEND_URL + '/api/checkLogin', this.formData)
     .subscribe((data:any) => {
@@ -54,11 +55,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // function executes when the go to account button is pressed. 
   goAccount(){
     this.router.navigate(['account'], { queryParams: { user: this.loggedUser} });
   }
 
 
+  // function executes when the create user button is pressed.
   createUser(){
     this.httpClient.post(BACKEND_URL + '/api/addUser', this.newUserArray)
     .subscribe((data:any) => {
@@ -70,6 +73,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
+  // function executes when the delete button is pressed.
   deleteUser(){
     this.httpClient.post(BACKEND_URL + '/api/deleteUser', this.newUserName)
     .subscribe((data:any) => {
