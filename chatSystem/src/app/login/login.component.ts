@@ -31,14 +31,15 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private loginService: LoginService, 
               private httpClient: HttpClient) {
-                // Route to get all the users for super and groupAdmin.
-                this.httpClient.post(BACKEND_URL + '/api/allUsers', httpOptions)
-                .subscribe((data:any) => {
-                  this.users = data; 
-                });
+                
               }
 
   ngOnInit(): void {
+    // Route to get all the users for super and groupAdmin.
+    this.httpClient.post(BACKEND_URL + '/api/allUsers', httpOptions)
+    .subscribe((data:any) => {
+    this.users = data; 
+    });
   }
 
   login(){

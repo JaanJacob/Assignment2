@@ -81,10 +81,19 @@ module.exports = function(db, app) {
   //--------------------------------------------------------------------------------------------------------
   
     //Get user data
-  //Return all users. 
+  //Return all users.
   app.get("/api/allUsers", function(req, res) {
     const collection = db.collection("users");
     users = [];
+    collection.find({}).toArray(function(err, data) {
+      res.send(data);
+    });
+  });
+
+  //Get group data
+  //Return all groups and their channels.
+  app.get("/api/allGroup", function(req, res) {
+    const collection = db.collection("groups");
     collection.find({}).toArray(function(err, data) {
       res.send(data);
     });
